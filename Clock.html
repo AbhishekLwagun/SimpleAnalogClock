@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #ebf5fc;
+        }
+        
+        .Screen {
+            width: 100%;
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+        
+        .Clock {
+            width: 15.8em;
+            height: 15.8rem;
+            background: #ebf5fc;
+            border-radius: 8rem;
+            display: grid;
+            place-items: center;
+            box-shadow: 3px 3px 5px rgb(0, 0, 0, 0.2), -2px -2px 5px rgb(255, 255, 255, 1);
+        }
+        
+        .Time {
+            width: 15rem;
+            height: 15rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ebf5fc;
+            background-image: url('clock.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 7.9rem;
+            box-shadow: inset 3px 3px 5px rgb(0, 0, 0, 0.2), inset -2px -2px 5px rgb(255, 255, 255, 0);
+        }
+        
+        .Time::before {
+            content: ' ';
+            width: 16px;
+            height: 16px;
+            border: 3px solid white;
+            border-radius: 50%;
+            background: gray;
+            z-index: 5;
+        }
+        
+        .for-hour {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+        }
+        
+        .for-hour::before {
+            content: ' ';
+            position: absolute;
+            background: rgb(255, 0, 128);
+            left: -2px;
+            top: -50px;
+            width: 3.68px;
+            height: 33.69px;
+            border-radius: 3px;
+        }
+        
+        .for-hour::after {
+            content: ' ';
+            width: 3.78px;
+            height: 30px;
+            background: rgb(255, 0, 128);
+            position: absolute;
+            left: -2px;
+            top: -25px;
+        }
+        
+        .for-minute {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+        }
+        
+        .for-minute::before {
+            content: ' ';
+            position: absolute;
+            background: rgb(99, 1, 1);
+            left: -1px;
+            top: -76px;
+            width: 3.68px;
+            height: 55px;
+            border-radius: 3px;
+        }
+        
+        .for-minute::after {
+            content: ' ';
+            width: 3.78px;
+            height: 30px;
+            background: rgb(99, 0, 0);
+            position: absolute;
+            left: -1px;
+            top: -25px;
+        }
+        
+        .for-second {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+        }
+        
+        .for-second::before {
+            content: ' ';
+            width: 1.5px;
+            height: 130px;
+            background: red;
+            position: absolute;
+            left: 0px;
+            top: -103px;
+            border-radius: 1px;
+        }
+        
+        .for-second::after {
+            content: ' ';
+            width: 3.7px;
+            height: 30px;
+            background: red;
+            position: absolute;
+            left: -1px;
+            top: 15px;
+            border-radius: 1px;
+        }
+        
+        day {
+            width: 30px;
+            height: 30px;
+            border: 1px solid red;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Screen">
+        <div class="Clock">
+            <div class="Time">
+                <div class="dot"></div>
+                <div class="Hand for-hour"></div>
+                <div class="Hand for-minute"></div>
+                <div class="Hand for-second"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const deg = 6;
+
+        const hour = document.querySelector(".for-hour");
+        const minute = document.querySelector(".for-minute");
+        const second = document.querySelector(".for-second");
+
+        function AnalogClocks() {
+            let day = new Date();
+            let hh = ((day.getHours() % 12) + day.getMinutes() / 60) * 30;
+            let mm = day.getMinutes() * deg;
+            let ss = day.getSeconds() * deg;
+
+            hour.style.transform = `rotateZ(${hh}deg)`;
+            minute.style.transform = `rotatez(${mm}deg)`;
+            second.style.transform = `rotatez(${ss}deg)`;
+        }
+
+
+        setInterval(AnalogClocks, 1000);
+
+
+
+        //________________________________________________________________________________________________________________________________________________________________
+
+
+        //The below code is for just test purpose with different method and technique of writing code.
+        //The below code is also not fully workable because of different reason.
+        //The below code has to be fixed so this is store for knowledge purpose only.
+
+        //__________________________________________________________________________________________________________________________________________________________
+
+
+
+        // function showTime() {
+        //     const now = new Date();
+
+        //     const seconds = now.getSeconds();
+        //     const seccondsDegrees = ((second / 60) * 360) + 90;
+        //     hour.style.transform = `rotate(${secondsDegrees}deg)`;
+
+
+        //     const minutes = now.getMinutes();
+        //     const MinutesDegrees = ((minute / 60) * 360) + 90;
+        //     minute.style.transform = `rotate(${minutesDegrees}deg)`;
+
+        //     const hour = now.getSeconds();
+        //     const hourDegrees = ((hour / 12) * 360) + 90;
+        //     hour.style.transform = `rotate(${hourDegrees}deg)`;
+        // }
+
+        // setInterval(showTime, 1000);
+        //___________________________________________________________________________________________________________________
+    </script>
+
+</body>
+
+</html>
